@@ -4,16 +4,34 @@ import './App.css';
 import CalendarDefault from './components/CalendarDefault.jsx'
 
 class App extends Component {
-  nextDate(a,b,c){
-    alert(new Date(c, b, a).getDate());
+  constructor(props){
+    super(props);
+    this.state = {
+      noOfDays: this.getNumberOfDays(new Date().getFullYear(), new Date().getMonth(), 0),
+      counter: new Date().getMonth(),
+      curMonth: new Date().getMonth()
+    }
   }
-  prevDate(a,b,c){
-    alert(new Date(c, b, a).getDate());
+
+  componentWillMount(){
+    this.setState({noOfDays: this.getNumberOfDays(new Date().getFullYear(), this.state.curMonth, 0)})
+  }
+  getNumberOfDays(year, month, c){
+    return new Date(year, month, c).getDate()
+  }
+  nextDate(){
+    this.setState({
+      counter: this.state.counter+1,
+      curMonth: this.state.curMonth+1
+    })
+  }
+  prevDate(){
+    this.setState({
+      counter: this.state.counter-1,
+      curMonth: this.state.curMonth-1
+    })
   }
   render() {
-    let date = new Date();
-    let monthStrMap = {'0': 'January', '1': 'February', '2': 'March', '3': 'April', '4': 'May', '5': 'June', '6': 'July', '7': 'August', '8': 'September'
-    , '9': 'October', '10': 'November', '11': 'December'};
     return (
       <div className="App">
         <header className="App-header">
@@ -21,9 +39,10 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <CalendarDefault
-          nextDate = {()=>this.nextDate(0,2,2015)}
-          curMonth = {monthStrMap[date.getMonth()]}
-          prevDate = {()=>this.prevDate(0,2,2015)}
+          nextDate = {()=>this.nextDate()}
+          curMonth = {this.state.curMonth}
+          noofDays = {this.getNumberOfDays(new Date().getFullYear(), this.state.counter+1, 0)}
+          prevDate = {()=>this.prevDate()}
         />
       </div>
     );

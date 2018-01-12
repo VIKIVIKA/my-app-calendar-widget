@@ -1,3 +1,7 @@
+*{
+    box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
@@ -24,8 +28,14 @@
 .u_dispInline{
   display: inline-block;
 }
-.u_width249{
-  width: 249px;
+.u_width252{
+  width: 252px;
+}
+.u_selNone{
+  user-select: none;
+}
+.u_bordRCollapse{
+  border-collapse: collapse;
 }
 .heading{
   padding: 9px;
@@ -67,6 +77,16 @@
   width: 40px;
   text-align: center;
   border: 1px solid #333;
+  margin-right: 2px;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+  transform: translatey(0px);
+  animation: float 6s ease-in-out infinite;
+}
+
+.highlightCell{
+  background-color: grey;
 }
 
 @keyframes App-logo-spin {
